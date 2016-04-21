@@ -1,0 +1,86 @@
+
+
+
+<div class="all55">
+	
+
+<div  class="gl">
+	
+
+<table width="99%" cellspacing="1" cellpadding="5" border="0" bgcolor="#99BBE8">
+<tbody>
+<tr class="thbg" bgcolor="#ceddef">
+<th width="5%";>&nbsp;</th>
+<th width="5%";>&nbsp;</th>
+<th width="8%";>登陆id</th>
+<th width="6%";>姓名</th>
+<th width="50%";>管理部门</th>
+<th width="10%";>办公室电话</th>
+<th width="15%";>移动电话</th>
+</tr>
+<{foreach from=$res item=num}>
+<tr class="gl44" bgcolor="#ffffff">
+<td width="5%";>
+<!--
+<a  href="javascript:jumpbox('../../action/user/user_delete.php?id=<{$num.id}>&tag=<{$tag}>');" value="删除"> 
+
+  	<font color="red"> 删除</font>
+	</a>
+	-->
+	<span style="cursor:pointer;color:red;" class="delete"><input type="hidden" name="id" value="<{$num.id}>" />删除</span>
+	
+</td>
+<td width="5%";>
+	<a  href="../../action/user/user_det.php?id=<{$num.id}>&tag=<{$tag}>$det=0" value="修改" class="gl1"> 
+		 修改
+	</a>
+</td>
+<td width="8%";><{$num.login_id}></td>
+<td width="6%";><{$num.name}></td>
+<td width="50%";><{$dept[<{$num.dept}>-1].name}></td>
+<td width="10%";><{$num.office_phone}></td>
+<td width="15%";><{$num.tel_1}></td>
+
+</tr>
+<{/foreach}>
+</tbody>
+</table>
+</div>
+<div class="gl2">
+	
+
+<table width="940" cellspacing="0" cellpadding="5" border="0" bgcolor="#F7F8F9">
+<tbody>
+<tr>
+<td class="text" align="right">
+<{include file="pages/default.html"}>
+</td>
+</tr>
+</tbody>
+</table>
+
+	<script type="text/javascript">
+	
+	$(document).ready(function(){
+	$('.delete').click(function(){
+		var deletea = $(this);
+		det(deletea,'user/user_delete.php');
+	});
+	
+});
+	
+	
+	/**
+		function jumpbox(url) {
+
+			if(confirm("你确定要删除吗？"))
+			{//如果是true ，那么就把页面转向
+				var _url = url;
+				location.href= _url;
+			} // End of jumpbox
+		}
+		*/
+	</script>
+</div>
+</div>
+

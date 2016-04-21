@@ -1,0 +1,81 @@
+<div id="in">
+								<table cellspacing="1" cellpadding="5" border="0" width="100%" bgcolor="#99BBE8">
+								<tbody>
+								<tr class="thbg">
+									<th><input id="all" type="checkbox" name=""><label for="all">全选</label></th>
+									<th>主题</th>
+									<th>接收者</th>	
+									<th>手机号</th>
+									<th>发送时间</th>	
+									<th>短信内容</th>
+								<{foreach from=$info item=num}>
+								</tr>
+								<tr bgcolor="#f1f2f3">
+									<td> <input type="checkbox" class="the" name="message" value="<{$num.id}>"></td>
+									<td><{$theme}></td>
+									<td><{$num.name}></td>
+									<td><{$num.tel}></td>
+									<td><{$num.time|date_format:"%Y-%m-%d %R"}></td>	
+									<td><{$msg_content}></td>
+								</tr>
+								<{/foreach}>
+								</tbody>
+								</table>
+
+							</p>
+						</div>
+						<input type="button" id="del_all" name="test" value="删除所选" />
+						<ul id="page">
+							<{include file="pages/default.html"}>
+						</ul>
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+		
+		//实现全选
+		$('#all').click(function(){
+			if($(this).attr('checked') == true)
+				$('.the').attr('checked','ture');
+			else
+				$('.the').removeAttr('checked');
+		});
+		
+		//删除所选接收人
+		$('#del_all').click(function(){
+			var messes = ""; //用于存储短信编号
+			var mess = document.getElementsByName('message');
+			for( var i=0;i<mess.length;i++)
+			{
+				if(mess[i].checked)
+				{
+					//获取数据
+					messes += mess[i].value + ",";
+				}
+			}
+			if(messes.length != 0){
+			$.post(
+				'<{#ACT#}>mess/mess_detail_del.php',
+				{messes:messes},
+				function(data){
+					art.dialog.tips(data,1.5);
+					$('input[name="message"]:checked').parent().parent().hide();
+				}
+			);
+			}
+			
+			
+		});
+		
+		
+		function jqchk(){  		//jquery获取复选框值    
+		  var chk_value = '';    
+		  $('input[name="test"]:checked').each(function(){    
+		  chk_value += $(this).val()+",";
+		  });    
+			return chk_value;
+		}
+
+	});
+</script>

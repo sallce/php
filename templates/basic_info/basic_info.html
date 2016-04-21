@@ -1,0 +1,49 @@
+﻿<table id="info" cellspacing="1" cellpadding="5"  width="100%" bgcolor="#99BBE8">
+					<tbody>
+					<tr>
+						<th class="thbg">基本信息</th>
+					</tr>
+					<tr bgcolor="#f1f2f3">
+						<td
+							<!--普通用户-->
+						<{if $right==3}>
+							<p>您所属单位 ：<b><{$data.dept}></b></p>
+							<p>短信配额:<strong><{$data.all}></strong>; 
+							已使用：<strong><{$data.used}></strong>；
+							剩余：<strong><{$data.left}></strong>；
+							<a class="modify" href="../../action/assign/msg_apply.php" title="申请短信配额" target="">点击这里</a>， 申请短信配额
+							</p>
+						<{/if}>
+							<!--普通管理员-->
+						<{if $right==2}>
+							<p>您所属单位 ：<b><{$data.dept}></b></p>
+							<p>短信配额:<strong><{$data.all}></strong>; 
+							已使用：<strong><{$data.used+$data.assign}></strong>；
+							分配：<strong><{$data.assign}></strong>；
+							自己使用：<strong><{$data.used}></strong>；
+							剩余：<strong><{$data.left}></strong>；
+							</p>
+							<p>
+							<a class="modify" href="../../action/assign/msg_apply.php" title="申请短信配额">点击这里</a>， 申请短信配额	
+							<a class="modify" href="../news.php" title="未处理消息">消息（<{$count}>）</a>		
+							<a class="modify" href="../news.php?isdeal=1" title="已处理消息">消息记录</a>					
+							</p>
+						<{/if}>
+							<!--超级管理员-->
+						<{if $right==1}>
+							<p>您所属单位 ：<b><{$data.dept}></b></p>
+							<p>短信配额:<strong><{$data.all}></strong>; 
+							已使用：<strong><{$data.used+$data.assign}></strong>；
+							分配：<strong><{$data.assign}></strong>；
+							自己使用：<strong><{$data.used}></strong>；
+							剩余：<strong><{$data.left}></strong>；
+							</p>
+							<p>
+							<a class="modify" href="../news.php" title="未处理消息">消息（<{$count}>）</a>		
+							<a class="modify" href="../news.php?isdeal=1" title="已处理消息">消息记录</a>					
+							</p>
+						<{/if}>
+						</td>
+					</tr>
+					</tbody>
+					</table>

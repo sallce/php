@@ -1,0 +1,97 @@
+<div class="all9">
+<div class="h4">
+<img width="16" height="16" border="0" style="vertical-align: middle;" alt="" src="<{#TEM#}>images/add.gif">
+<a class="h1" href="add_frd.php">添加好友</a>
+<img width="16" height="16" border="0" style="vertical-align: middle;" alt="" src="<{#TEM#}>images/add.gif">
+<a class="h1" href="new_gr.php">添加分组</a>
+</div>
+<div  class="h5">
+
+<table width="99%" cellspacing="1" cellpadding="5" border="0" bgcolor="#99BBE8">
+<tbody>
+<tr class="thbg" bgcolor="#f1f1f1">
+<th width="10%">&nbsp;</th>
+<th width="10%">&nbsp;</th>
+<th width="36%">组名</th>
+<th width="35%">备注</th>
+</tr>
+<{section name=n loop=$info}>
+<tr class="normal" bgcolor="#ffffff">
+<td width="10%">
+<a class="h2" style="color:red;cursor:pointer"><input type="hidden" name="id" value="<{$info[n].id}>" />删除</a>
+</td>
+<td width="10%">
+<a  class="gl1" href="cha_gr.php?id=<{$info[n].id}>&f=cha">修改</a>
+</td>
+<td width="36%"><{$info[n].group_name}></td>
+<td width="35%"><{$info[n].note}></td>
+</tr>
+<{/section}>
+</tbody>
+</table>
+
+</div>
+<div class="h6">
+
+<{include file="pages/$temp.html"}>
+
+</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+	
+	//删除分组弹窗
+	$('.h2').click(function(){
+				//$('.operate').attr('id','');
+				//$(this).attr('id','operate');
+				var thi = $(this);
+				var id2 = thi.children("input").val();
+				var dialog = art.dialog.open('<{#ACT#}>friend/delete_gr.php?id='+id2, {
+					
+					//follow:document.getElementById('operate'),
+					drag:true,
+					padding:0,
+					id:'operate',
+					fixed: true,
+					width:'550px',			//弹窗的宽度
+					height:'250px',			//弹窗的高度
+					lock: false,				//锁屏
+					//opacity: 0,			// 透明度
+					
+					//再点击"添加收信人"按钮后执行
+					ok:function(){
+						
+						var iframe = this.iframe.contentWindow;
+						var top = art.dialog.top;// 引用顶层页面window对象
+						var way = ""; // 获取接受短信的所有人
+						var one_group = "";
+						var way = iframe.document.getElementsByName('way')[0].value;
+						var one_group = iframe.document.getElementsByName('one_group')[0].value;
+						//alert(group);
+						$.get(
+							'<{#ACT#}>friend/delete_gr.php',
+							{id:thi.children("input").val(),way:way,one_group:one_group},
+							function(data){
+								var result = "";
+								if(data == '1'){
+									result = "操作成功!";
+								}else{
+									result = data;
+								}
+								art.dialog.tips(result);
+							}
+						);
+						thi.parent().parent().hide();
+						return true; //是否关闭窗口,false不关闭,ture关闭
+					},
+					okVal: '确定',
+					cancelVal: '取消',
+					cancel: true //为true等价于function(){}
+					
+				});
+				//art.dialog.list['operate'].hide();
+		
+		
+	});
+	});
+</script>

@@ -1,0 +1,42 @@
+
+<div class="all55">
+<div  class="gl">
+<table width="99%" cellspacing="1" cellpadding="5" border="0" bgcolor="#99BBE8">
+	<tr class="thbg" bgcolor="#f1f1f1">
+		<th width="5%">&nbsp;</th>
+		<th width="5%">&nbsp;</th>
+		<th width="50%">部门名称</th>
+		<th width="10%">负责人</th>
+		<th width="10%">负责人办公电话</th>
+		<th width="19%">负责人联系方式</th>
+	</tr>
+	<{section name=n loop=$info}>
+		<tr class="normal" bgcolor="#ffffff">
+			<td width="5%">
+				<span style="cursor:pointer;" class="delete"><input type="hidden" name="id" value="<{$info[n].id}>" /><font color="red">删除</font></span>
+			</td>
+			<td width="5%">
+				<a  class="gl1" href="dept_change.php?id=<{$info[n].id}>">修改</a>
+			</td>
+			<td width="50%"><{$info[n].name}></td>
+			<td width="10%"><{$info[n].header}></td>
+			<td width="10%"><{$info[n].office_phone}></td>
+			<td width="19%"><{$info[n].header_tel}></td>
+		</tr>
+	<{/section}>
+</table>
+	 </div>
+  <div>
+  	<{include file="pages/$temp.html"}>
+  </div>
+
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.delete').click(function(){
+		var deletea = $(this);
+		det(deletea,'depart/dept_delete.php');
+	});
+	
+});
+</script>

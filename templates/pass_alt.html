@@ -1,0 +1,8 @@
+<div id="in">
+<form method="post" action="../pass_alt.php?id=<{$info.id}>&newsid=<{$newsid}>" >
+<p><span class="ali">用户：</span><{$info.name}></p>
+<p><span class="ali">新密码：</span><input type="password" name="passwd" value="" />  <font color="red"><{$error['passwd']}></font></p>
+<p><span class="ali">确认密码：</span><input type="password" name="passwd2" value="" />   <font color="red"><{$error['passwd2']}></font></p>
+<input type="submit" name="insert" value="修改" style="font-size:14px;">&nbsp;<font color="red" size="3px"><{$prompt}></font>
+</form>
+</div>

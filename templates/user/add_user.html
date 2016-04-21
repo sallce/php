@@ -1,0 +1,52 @@
+
+	<form method="post" action="../../action/user/add_user.php" >
+		<table cellspacing="1" class="grid">
+			<tr>
+				<td>登陆id：</td>
+				<td><input type="text" name="login_id" value="<{$login_id}>" size="30"/>&nbsp;<font color="red" size="2px"><{$error.login_id}></font></td>
+			</tr>
+			<tr class="grid1">
+				<td>姓名：</td>
+				<td><input type="text" name="name" value="<{$name}>" size="30" />&nbsp;<font color="red" size="2px"><{$error.name}></font></td>
+			</tr>
+			<tr class="grid1">
+				<td>密码：</td>
+				<td><input type="password" name="passwd" value="" size="30"/>&nbsp;<font color="red" size="2px"><{$error.passwd}></font></td>
+			</tr>
+			<tr class="grid1">
+				<td>重复密码：</td>
+				<td><input type="password" name="passwd2" value="" size="30"/>&nbsp;<font color="red" size="2px"><{$error.passwd2}></font></td>
+			</tr>
+			<{if $pid == 0}>
+			<tr class="grid1">
+				<td>所属部门:</td>
+				<td>
+					<select name="dept">
+						<option value=""  <{if $dept == ""}>selected<{/if}> disabled>--请选择部门--</option>
+						<{foreach name="dept" from=$dept_list item=num}>
+							<option value=<{$num.id}> <{if $dept == $num.id}>  selected <{/if}> > <{for $i=0;$i<$num.count;$i++}>-<{/for}> <{$num.name}></font></option>
+						<{/foreach}>
+					</select>
+				<span class="error">&nbsp;<font color="red" size="2px"><{$error.dept}></span>
+				</td>
+			</tr>
+			<{/if}>
+			<tr class="grid1">
+				<td>办公室电话：</td>
+				<td><input type="text" name="office_phone" value="<{$office_phone}>" size="30"/>&nbsp;<font color="red" size="2px"><{$error.office_phone}></font></td>
+			</tr>
+			<tr class="grid1">
+				<td>移动手机1：</td>
+				<td><input type="text" name="tel1" value="<{$tel_1}>" size="30" />&nbsp;<font color="red" size="2px"><{$error.tel1}></font></td>
+			</tr>
+			<tr class="grid1"> 
+				<td>移动手机2：</td>
+				<td><input type="text" name="tel2" value="<{$tel_2}>" size="30"/>&nbsp;<font color="red" size="2px"><{$error.tel2}></font></td>
+			</tr>
+			<tr class="grid1">
+				<td>电子邮箱：</td>
+				<td><input type="text" name="email" value="<{$email}>"size="30" /></td>
+			</tr>
+		</table>
+				<input type="submit" name="insert" value="添加" style="font-size:14px;">&nbsp;<font color="red" size="3px"><{$prompt}></font>
+	</form>

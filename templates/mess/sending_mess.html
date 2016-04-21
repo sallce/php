@@ -1,0 +1,47 @@
+﻿						<div id="in">
+							<form method="post" action="../../action/mess/sending_msg.php?class=1">
+								<img src="<{#TEM#}>images/icon-mail2.gif" />
+								<select class="search_d" name="find_type">
+									<option value="theme" selected="selected">主题</option>
+									<option value="name">姓名</option>
+									<option value="tel">手机号</option>
+								</select>
+								<input class="search_d" type="text" name="find_content"/>
+								<input class="search_d" type="submit" name="" value="搜索" />
+							</form>
+
+							<table cellspacing="1" cellpadding="5" border="0" width="100%" bgcolor="#99BBE8">
+							<tbody>
+							<tr class="thbg">
+								<th width="5%"></th>
+								<th width="5%"></th>	
+								<th width="12%">主题</th>
+								<th width="15%">发送时间</th>	
+								<th>短信内容</th>
+							</tr>
+						<{foreach from=$con_data item=num}>
+							<tr bgcolor="#f1f2f3">
+								<td><a  href="javascript:jumpbox('../../action/mess/msg_delete.php?id=<{$num.id}>');" value="删除"> 
+	<font color="red"> 删除</font></a></td>
+								<td><a class="modify" href="../../action/mess/msg_modify.php?id=<{$num.id}>" title="修改">修改</a></td>
+								<td><a class="modify" href="../../action/mess/msg_deta.php?id=<{$num.id}>" title="点击查看详情"><{$num.theme}></a></td>
+								<td><{$num.time|date_format:"%Y-%m-%d %R"}></td>
+								<td><{$num.content}></td>
+							</tr>
+						<{/foreach}>
+							</tbody>
+							</table>
+						</div>
+						<ul id="page">
+							<{include file="pages/default.html"}>
+						</ul>
+<script type="text/javascript">
+	function jumpbox(url) {
+
+		if(confirm("你确定要删除吗？"))
+		{//如果是true ，那么就把页面转向
+			var _url = url;
+			location.href= _url;
+		} // End of jumpbox
+	}
+</script>

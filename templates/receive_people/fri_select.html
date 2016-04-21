@@ -1,0 +1,108 @@
+<div id="change_all">
+<{config_load file="base.php"}>
+<style type="text/css">
+	ul{
+	list-style:none;
+	}
+	span{
+	font-size:13px;
+	}
+	table{
+	font-size:13px;
+	}
+	.thbg {
+	background: url("<{#TEM#}>images/table-th-bg.gif") repeat-x 0 0;
+	}
+	#search_class{margin:10px 15px;}
+	#search{margin:10px 15px;}
+	#condition{margin:10px 15px;}
+</style>
+
+<form method="post">
+	<select name="search_class" id="search_class">
+		<option value="name" <{if $class_check == '0'}> selected="selected"<{/if}>>姓名</option>
+		<option value="tel_1"  <{if $class_check == '1'}> selected="selected"<{/if}>>手机号</option>
+	</select>
+	<input type="text" name="search" id="condition" value="" />
+	<input type="button" name="test" value="查询" id="search" />
+</form>
+<span>请选择好友组：</span>
+<select name="group_id" id="group_id">
+	<option value="0" <{if $group_id eq '0'}> selected="selected"<{/if}>>系统分组</option>
+	<{section loop=$all_group name=group}>
+	<option value="<{$all_group[group].id}>" <{if $group_id eq <{$all_group[group].id}>}> selected="selected"<{/if}>><{$all_group[group].group_name}></option>
+	<{/section}>
+	
+</select>
+
+
+<div id="search_result"></div>
+
+<form id="myform1" name="myform1">
+<br />	
+	<table cellspacing="1" cellpadding="5" border="0" width="568px" bgcolor="#99BBE8">
+		
+		<tr class="thbg">
+			<td><input type="checkbox" name="all" id="all" /><label for="all">全选</label></td>
+			<th>姓名</th>
+			<th>手机</th>
+			<th>所属组别</th>
+		</tr>
+		<{section name=people loop=$group_people}>
+		<tr bgcolor="#f1f2f3">
+			<td><input type="checkbox" name="people" value="<{$group_people[people].tel_1}>" class="the"/></td>
+			<td><{$group_people[people].name}></td>
+			<td><{$group_people[people].tel_1}></td>
+			<td><{$group_people[people].group}></td>
+		</tr>
+		<{/section}>
+	</table>
+
+</form>
+
+<script type="text/javascript" src="<{#TEM#}>js/jquery.js"></script>
+<script type="text/javascript" src="<{#TEM#}>js/artDialog.source.js?skin=default"></script>
+<script type="text/javascript" src="<{#TEM#}>js/iframeTools.source.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#search_result').hide();
+		$('#search').click(function(){
+			var condition = $('#condition').val();
+			if(condition){
+				$.post(
+					'<{#ACT#}>receive_people/fri_select.php',
+					{condition : condition,search_class : $('#search_class').val()},
+					function(data){
+						$('#change_all').html(data);
+					}
+					
+				);
+			}else{
+				
+			}
+		});
+		
+		//实现选择不同分组实现数据传输
+		$('#group_id').change(function(){
+			if($(this).val() != ''){
+				$.post(
+					'<{#ACT#}>receive_people/fri_select.php',
+					{group_id:$(this).val()},
+					function(data){
+						$('#change_all').html('');
+						$('#change_all').html(data);
+					}
+				);
+			}
+		});
+		
+		//实现全选
+		$('#all').click(function(){
+			if($(this).attr('checked') == true)
+				$('.the').attr('checked','ture');
+			else
+				$('.the').removeAttr('checked');
+		});
+	});
+</script>
+</div>

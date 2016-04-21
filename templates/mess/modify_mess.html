@@ -1,0 +1,209 @@
+﻿<div id="send_mess">
+	<div id="flower">
+				
+			</div>
+<style type="text/css">
+.ui-timepicker-div .ui-widget-header { margin-bottom: 8px; } 
+.ui-timepicker-div dl { text-align: left; } 
+.ui-timepicker-div dl dt { height: 25px; margin-bottom: -25px; } 
+.ui-timepicker-div dl dd { margin: 0 10px 10px 65px; } 
+.ui-timepicker-div td { font-size: 40%; } 
+.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; } 
+.ui_tpicker_hour_label,.ui_tpicker_minute_label,.ui_tpicker_second_label, 
+.ui_tpicker_millisec_label,.ui_tpicker_time_label{padding-left:20px} 
+</style>
+<form method="post" action="../../action/mess/msg_modify.php?id=<{$id}>">
+							<span class="s_left">收信人：</span>
+							<textarea id="all_people" name="receiver"><{$tel}></textarea>
+							<span class="s_right">手机号和手机号之间用逗号隔开(最多500个号码)</span>
+							<p>
+							<!--<input type="button" name="" value="从部门添加收信人" id="click" />-->
+							从好友列表 <input type="button" name="" value="添加收信人" id="fri_click" />
+							</p>
+					
+							
+							<div class="theme">
+							<span class="s_left">主题：</span>
+							<input type="text" name="theme" value="<{$msg.theme}>" />
+							</div>
+							<br />
+							<div class="area">
+							<span class="s_left">短信内容：</span>
+							<textarea name="content" class="chackTextarea"><{$msg.content}></textarea>
+							<span class="s_right" id="sign">
+							您的签名:【东北林业大学】，占短信内容8字符信息内容(每70个字为1条短信，系统自动拆分)</span>
+							<p>
+								<span><span class="p_right">此条还可以输入 <b class="num">62</b> 字，将按1条短信发出.</span></span>
+							</p>
+							</div>
+							
+							<span id="time" >发送时间：</span>
+							<div id="mode2">
+								<input type="text" name="send_time" id="send__time" value="<{$time|date_format:"%Y-%m-%d %R"}>"/> 
+								<br />
+								<input type="submit" name="a" value="修改" />
+							</div><{$prompt}>
+			</form>
+		
+						</div>
+						
+	<script type="text/javascript" src="<{#TEM#}>js/jquery-ui.js"></script>
+	<script type="text/javascript" src="<{#TEM#}>js/jquery-ui-slide.min.js"></script>
+	<script type="text/javascript" src="<{#TEM#}>js/jquery-ui-timepicker-addon.js"></script>
+		
+		<script type="text/javascript" src="<{#TEM#}>js/artDialog.source.js?skin=default"></script>
+		<script type="text/javascript" src="<{#TEM#}>js/iframeTools.source.js"></script>
+		
+	<script type="text/javascript">
+		$(document).ready(function(){
+			
+			//成功返回提示
+			var poi = '<{$point}>';
+			if( poi == '1'){
+				point('短信修改成功!','mess/sending_msg.php');
+			}
+			
+			
+			// 弹出错误提示信息...
+			var error = '<{$error}>';
+			if(error != ''){
+				var timer;
+				art.dialog({
+					content: error,
+					init: function () {
+						var that = this, i = 5;
+						var fn = function () {
+							that.title(i + '秒后关闭');
+							!i && that.close();
+							i --;
+						};
+						timer = setInterval(fn, 1000);
+						fn();
+					},
+					close: function () {
+						clearInterval(timer);
+					}
+				}).show();
+			}
+			
+			
+			// 实现时间按钮
+			$('#send__time').datetimepicker();
+			 $("input[name='send_class']").click(function() {
+				if($("input[name='send_class']").get(1).checked){
+					$('#show_send_time').show();
+				}else{
+					$('#send__time').val(''); // 清空时间文本框
+					$('#show_send_time').hide();
+					
+				}
+			});
+			
+			
+			//从好友列表中添加收信人
+			$('#fri_click').click(function(){
+			
+				art.dialog.open('<{#ACT#}>receive_people/fri_select.php', {
+					
+					left: '50%',
+					top: '50%',
+					fixed: true,
+					drag: true,
+					width:'600px',			//弹窗的宽度
+					height:'400px',			//弹窗的高度
+					
+					lock: true,				//锁屏
+					opacity: 0.12,			// 透明度
+					title: '请选择接收人',
+					
+					//再点击"添加收信人"按钮后执行
+					ok:function(){
+						var iframe = this.iframe.contentWindow;
+						var top = art.dialog.top;// 引用顶层页面window对象
+						var all_people = ""; // 获取接受短信的所有人
+						var to_people = iframe.document.getElementsByName('people');
+						for( var i=0;i<to_people.length;i++)
+						{
+							if(to_people[i].checked)
+							{
+								//获取数据
+								all_people += to_people[i].value + ",";
+							}
+						}
+						//把数据写到输入框中
+						if($('#all_people').val()){
+							var old_people = $('#all_people').val();
+							$('#all_people').val(old_people + all_people);
+							}else{
+								$('#all_people').val(all_people);
+							}
+						return false; //是否关闭窗口,false不关闭,ture关闭
+					},
+					okVal: '添加至收信人',
+					
+					
+				});
+				
+			});
+			
+			//实现全选
+			$('#all').click(function(){
+				if($(this).attr('checked') == true)
+					$('.the').attr('checked','ture');
+				else
+					$('.the').removeAttr('checked');
+			});
+		});
+	</script>
+	
+	
+	
+<script type="text/javascript">
+var txtobj={
+divName:"area", //外层容器的class
+textareaName:"chackTextarea", //textarea的class
+numName:"num", //数字的class
+num:70 //数字的最大数目
+}
+var textareaFn=function(){
+//定义变量
+var $onthis;//指向当前
+var $divname=txtobj.divName; //外层容器的class
+var $textareaName=txtobj.textareaName; //textarea的class
+var $numName=txtobj.numName; //数字的class
+var $num=txtobj.num; //数字的最大数目
+function isChinese(str){  //判断是不是中文
+var reCh=/[u00-uff]/;
+return !reCh.test(str);
+}
+function numChange(){
+var strlen=16; //初始定义长度为16,为8个汉字
+var txtval = $.trim($onthis.val()); // 获取填写内容里面的值
+for(var i=0;i<txtval.length;i++){
+if(isChinese(txtval.charAt(i))==true){
+strlen=strlen+2;//中文为2个字符
+}else{
+strlen=strlen+1;//英文一个字符
+}
+}
+strlen=Math.ceil(strlen/2);//中英文相加除2取整数
+
+if($num-strlen<0){
+$par.html("此条还可以输入 <b class="+$numName+">"+Math.abs(Math.ceil(Math.abs(($num-strlen)/70)+1)*$num-strlen)+"</b> 字,将按<b style='color:red;font-weight:lighter' class="+$numName+">"+Math.ceil(Math.abs(($num-strlen)/70)+1)+"</b>条短信发出."); //超出的样式
+}
+else{
+$par.html("此条还可以输入 <b class="+$numName+">"+($num-strlen)+"</b> 字,将按1条短信发出."); //正常时候
+}
+$b.html($num-strlen);
+}
+//函数完
+
+$("."+$textareaName).live("focus",function(){
+$b=$(this).parents("."+$divname).find("."+$numName); //获取当前的数字
+$par=$b.parent();
+$onthis=$(this); //获取当前的textarea
+var setNum=setInterval(numChange,500);
+});
+}
+textareaFn();
+</script>

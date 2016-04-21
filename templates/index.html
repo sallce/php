@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<{config_load file="base.php"}>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>东北林业大学短信管理平台</title>
+		<link rel="stylesheet" href="<{#TEM#}>css/skin.css" type="text/css"  />
+		<link rel="stylesheet" href="<{#TEM#}>css/common1.css" type="text/css"/>
+		<link rel="stylesheet" href="<{#TEM#}>css/jquery-ui.css" type="text/css"/>
+		<link rel="stylesheet" href="<{#TEM#}>css/common.css" type="text/css"/>
+		<script type="text/javascript" src="<{#TEM#}>js/jquery.js"></script>
+		<script type="text/javascript" src="<{#TEM#}>js/artDialog.source.js?skin=default"></script>
+		<script type="text/javascript" src="<{#TEM#}>js/iframeTools.source.js"></script>
+
+		
+	</head>
+	
+	
+	<body>
+		<!--***********************************top**********************************-->
+		<div id="logo">
+			<img src="<{#TEM#}>images/logo1.gif"  />
+			<span id="greet">您好 <{$who}>  今天是<{$when}> <{$week}></span>
+			<a id="out" href="<{#SYSTEM_ROOT#}>login.php" title="安全退出" target="_self"><img  src="<{#TEM#}>images/out.gif" alt="安全退出" / ></a>
+		</div>
+		<!--*********************************left************************************-->
+		<script type="text/javascript">
+			
+			$(document).ready(function()
+			{
+				var js_display = '<{$js_display}>';
+				$(".display").eq(js_display).removeClass('display');
+				$('.boos').click(function(){
+					$(".boos").next('div').slideUp('fast');
+					$(this).next('div').slideToggle('slow');
+				});
+			});
+			
+		</script>
+		<div id="left">
+		
+			<ul>
+				<span class="boos">
+				<a href="<{#SYSTEM_ROOT#}>index.php">基本信息</a>
+				</span>
+				<div class="display"></div>
+			</ul>
+		
+			<ul>
+				<span class="boos">短信平台</span>
+				<div class="display">
+				<img src="<{#TEM#}>images/menu_topline.gif"/>
+				<li><a href="<{#ACT#}>mess/send_msg.php">短信群发</a></li>
+				<li><a href="<{#ACT#}>mess/sending_msg.php">待发短信</a></li>
+				<li><a href="<{#ACT#}>mess/sent_msg.php">已发短信</a></li>
+				<li><a href="#">接收短信</a></li>
+				</div>
+			</ul>
+			
+			<ul>
+				<span class="boos">部门管理</span>
+				<div class="display">
+				<img src="<{#TEM#}>images/menu_topline.gif"/>
+				<li><a href="<{#ACT#}>depart/add_dept.php">添加部门</a></li>
+				<li><a href="<{#ACT#}>depart/dept_list.php">部门列表</a></li>
+				</div>
+			</ul>
+			
+			<{if $right==1}>
+			<ul>
+				<span class="boos">用户管理</span>
+				<div class="display">
+				<img src="<{#TEM#}>images/menu_topline.gif"/>
+				<li><a href="<{#ACT#}>user/add_user.php">添加管理员</a></li>
+				<li><a href="<{#ACT#}>user/user_list.php">管理员列表</a></li>
+				</div>
+			</ul>
+			<{/if}>
+			
+			<{if $right==2}>
+			<ul>
+				<span class="boos">用户管理</span>
+				<div class="display">
+				<img src="<{#TEM#}>images/menu_topline.gif"/>
+				<li><a href="<{#ACT#}>user/add_user.php">添加用户</a></li>
+				<li><a href="<{#ACT#}>user/user_list.php">用户列表</a></li>
+				</div>
+			</ul>
+			<{/if}>
+			
+			<ul>
+				<span class="boos">好友管理</span>
+				<div class="display">
+				<img src="<{#TEM#}>images/menu_topline.gif"/>
+				<li><a href="<{#ACT#}>friend/add_frd.php">添加好友</a></li>
+				<li><a href="<{#ACT#}>friend/list_frd.php">好友列表</a></li>
+				</div>
+			</ul>
+	
+			<{if $right==1||$right==2}>
+			<ul>
+				<span class="boos"><a href="<{#ACT#}>assign/msg_assign.php">短信分配</a></span>
+
+				<div class="display"></div>
+			</ul>
+			<{/if}>
+			
+			<ul>
+				<span class="boos">日志管理</span>
+				<div class="display">
+				<img src="<{#TEM#}>images/menu_topline.gif"/>
+				<li><a href="<{#ACT#}>log/msg_log.php">短信日志</a></li>
+				<li><a href="<{#ACT#}>log/login_log.php">登陆日志</a></li>
+				<li><a href="<{#ACT#}>log/log_query.php">日志查询</a></li>
+				</div>
+			</ul>
+			
+			<ul>
+				<span class="boos">个人设置</span>
+				<div class="display">
+				<img src="<{#TEM#}>images/menu_topline.gif"/>
+				<li><a href="<{#ACT#}>settting/self_baseinfo.php" >查看个人信息</a></li>
+				<li><a href="<{#ACT#}>settting/edit_inf.php" >修改信息</a></li>    
+				<li><a href="<{#ACT#}>settting/edit_paswd.php" >修改密码</a></li>   
+				</div>
+			</ul>
+			
+	</div>
+	<!--******************************right***************************************-->
+	<table id="right" cellpadding="0" cellspacing="0">
+	  <tbody>
+	  <tr>
+		<td width="17" valign="top" background="<{#TEM#}>images/mail_leftbg.gif"><img src="<{#TEM#}>images/left-top-right.gif" width="17" height="29"></td>
+		<td valign="top" background="<{#TEM#}>images/content-bg.gif">
+			<table width="auto" height="31"  cellpadding="0" cellspacing="0" >
+			  <tbody>
+			  <tr>
+				<td height="31" class="titlebtleft"></td>
+				<td height="31"><div class="titlebt"><{$title}></div></td>
+				<td height="31" class="titlebtright"></td>
+			  </tr>
+			  </tbody>
+			</table>
+		</td>
+		<td width="16" valign="top" background="<{#TEM#}>images/mail_rightbg.gif"><img src="<{#TEM#}>images/nav-right-bg.gif" width="16" height="29"></td>
+	  </tr>
+	  <tr>
+		<td valign="middle" background="<{#TEM#}>images/mail_leftbg.gif"></td>
+		<td valign="top" bgcolor="#F7F8F9">
+			<table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+			  <tbody>
+			  <tr>
+				<td colspan="2" valign="top" height="200" style="padding-top:10px">
+				<!-- s -->
+				
+					<{include file="$content.html"}>
+				
+				<!-- e -->
+				</td>
+			  </tr>
+			  </tbody>
+			</table>
+		</td>
+		<td background="<{#TEM#}>images/mail_rightbg.gif"></td>
+	  </tr>
+	  <tr>
+		<td valign="bottom" background="<{#TEM#}>images/mail_leftbg.gif"><img src="<{#TEM#}>images/buttom_left2.gif" width="17" height="17"></td>
+		<td background="<{#TEM#}>images/buttom_bgs.gif"><img src="<{#TEM#}>images/buttom_bgs.gif" width="17" height="17"></td>
+		<td valign="bottom" background="<{#TEM#}>images/mail_rightbg.gif"><img src="<{#TEM#}>images/buttom_right2.gif" width="16" height="17"></td>
+	  </tr>
+	  </tbody>
+	</table>
+	<script type="text/javascript">
+	
+	/**
+	* 操作提示函数
+	*/
+	var point = function(content,re_url){
+		art.dialog.tips(content,1.5);
+		setTimeout("window.location.href='<{#ACT#}>"+re_url+"'",1500);
+	}
+	
+	/**
+	* 行单位加重显示函数
+	*/
+	var tr_hover =function(normal){
+		$("."+normal).hover( 
+		  function(){ 
+			$(this).addClass("tr_hover");    //鼠标经过添加hover样式 
+		  }, 
+		  function(){ 
+			$(this).removeClass("tr_hover");   //鼠标离开移除hover样式 
+		  } 
+		); 
+	}
+	
+	/**
+	* 实现删除弹出框的函数
+	*/
+	var det = function(deletea,path){
+		
+		art.dialog.confirm('你确认删除操作？', function(){
+		// 点击确认执行
+		$.get(
+			'<{#ACT#}>/'+path,
+			{id:deletea.children("input").val()},
+			function(){
+				deletea.parent().parent().hide();
+			}
+		);
+		art.dialog.tips('删除成功！');
+		}, function(){
+			//点击取消执行
+			
+		});
+	}
+	</script>
+	</body>
+</html>

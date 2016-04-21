@@ -1,0 +1,192 @@
+<{config_load file="base.php"}>
+
+		<script type="text/javascript" src="<{#TEM#}>js/jquery.js"></script>
+<div id="change_all">
+
+<div class="all66">
+	
+
+<div class="hh4">
+	<ul>
+	  <li><img width="16" height="16" border="0" style="vertical-align: middle;" alt="" src="<{#TEM#}>images/add.gif">
+
+	  <a class="hh1" href="add_frd.php">添加好友</a></li>
+	  <li><img width="16" height="16" border="0" style="vertical-align: middle;" alt="" src="<{#TEM#}>images/add.gif">
+	  <a class="hh1" href="new_gr.php">添加分组</a></li>
+	  <li><img width="16" height="16" border="0" style="vertical-align: middle;" alt="" src="<{#TEM#}>images/add.gif">
+	  <a class="hh1" href="edit_gr.php">编辑分组</a></li>
+
+	</ul>
+</div>
+<div class="hh">
+	
+
+<form style="margin:0;padding:0;" method="post">
+<table width="99%" cellspacing="1" cellpadding="5" border="0">
+<tbody>
+<tr>
+<td class="hh33">
+
+<select name="xp">
+<option value="x">姓名 </option>
+<option value="p">手机号 </option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="text" value="" size="30" name="forxp">
+<input type="submit"  value="搜索">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+选择好友分组  :
+<select name="group" id="group_id" class="z8">
+		<option value="" <{if $group_id eq ''}> selected="selected"<{/if}>>--请选择分组--</option>
+		<option value="0" <{if $group_id eq '0'}> selected="selected"<{/if}>>系统分组</option>
+	<{section name=n loop=$frd_group}>
+	<option value="<{$frd_group[n].id}>"<{if $group_id eq <{$frd_group[n].id}>}> selected="selected"<{/if}>><{$frd_group[n].group_name}></option>
+	<{/section}>
+	</select>
+	</select>
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+</div>
+
+<div  class="hh5">
+	
+
+<table width="99%" cellspacing="1" cellpadding="5" border="0" bgcolor="#99BBE8">
+<tbody>
+<tr class="thbg" bgcolor="#ceddef">
+<th  width="5%">&nbsp;</th>
+<th  width="5%">&nbsp;</th>
+<th  width="12%">姓名</th>
+<th  width="5%">性别</th>
+
+<th width="40%">所属部门</th>
+<th width="12%" >手机号码</th>
+<th width="11%">组别</th>
+<th width="10%">&nbsp;</th>
+</tr>
+<{section name=n loop=$info}>
+<tr class="normal" bgcolor="#ffffff">
+<td  width="5%">
+<!--
+<a class="hh2" href="delete_f.php">删除</a>
+-->
+<span style="cursor:pointer;" class="delete"><input type="hidden" name="id" value="<{$info[n].id}>" />删除</span>
+</td>
+<td  width="5%">
+<a  class="hh2" href="edit_frd.php?id=<{$info[n].id}>">修改</a>
+</td>
+<td width="12%"><{$info[n].name}></td>
+<td class="hh12" width="5%"><{if $info[n].sex eq '0'}>男 <{else}> 女 <{/if}></td>
+
+<td width="40%">
+	<{section name=b loop=$dept}>
+	<{if $info[n].dept eq $dept[b].id}> <{$dept[b].name}> <{/if}>
+	<{/section}>
+</td>
+<td width="12%"><{$info[n].tel_1}></td>
+<td width="11%">
+	<{$info[n].group}>
+</td>
+<td  width="10%">
+<a class="operate" style="cursor:pointer"><input type="hidden" name="id" value="<{$info[n].id}>" />移动好友</a>
+</td>
+</tr>
+
+<{/section}>
+
+</table>
+
+	<p><{include file="pages/$temp.html"}></p>
+</div>
+</div>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	
+	//行单位加重显示
+	tr_hover('normal');
+	
+	//操作好友的弹窗
+	$('.operate').click(function(){
+				$('.operate').attr('id','');
+				$(this).attr('id','operate');
+				var thi = $(this);
+				var dialog = art.dialog.open('<{#ACT#}>friend/chan_gr.php', {
+					
+					follow:document.getElementById('operate'),
+					drag:true,
+					padding:0,
+					id:'operate',
+					fixed: true,
+					width:'200px',			//弹窗的宽度
+					height:'120px',			//弹窗的高度
+					lock: false,				//锁屏
+					//opacity: 0,			// 透明度
+					title:'',
+					
+					//再点击"添加收信人"按钮后执行
+					ok:function(){
+						
+						var iframe = this.iframe.contentWindow;
+						var top = art.dialog.top;// 引用顶层页面window对象
+						var group = ""; // 获取接受短信的所有人
+						var way = "";
+						var group = iframe.document.getElementsByName('group')[0].value;
+						var way = iframe.document.getElementsByName('way')[0].value;
+						//alert(group);
+						$.post(
+							'<{#ACT#}>friend/chan_gr.php',
+							{id:thi.children("input").val(),group:group,way:way},
+							function(data){
+								var result = "";
+								if(data == '1'){
+									result = "操作成功!";
+								}else{
+									result = data;
+								}
+								art.dialog.tips(result);
+							}
+						);
+						return true; //是否关闭窗口,false不关闭,ture关闭
+					},
+					okVal: '确定',
+					
+					
+				});
+				//art.dialog.list['operate'].hide();
+		
+		
+	});
+	
+	
+	
+	//实现删除操作
+	$('.delete').click(function(){
+		var deletea = $(this);
+		det(deletea,'friend/delete_f.php');
+	});
+	
+//实现选择不同分组实现数据传输
+	$('#group_id').change(function(){
+		if($(this).val() != ''){
+			$.post(
+				'<{#ACT#}>friend/change_group.php',
+				{group:$(this).val()},
+				function(data){
+					$('#change_all').html('');
+					$('#change_all').html(data);
+				}
+			);
+		}
+	});
+	
+	
+});
+</script>
+
+</div>

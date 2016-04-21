@@ -1,0 +1,36 @@
+	<{config_load file="base.php"}>
+	<style type="text/css">
+		/**好友列表的CSS**/
+/**编辑分组**/
+.d ul li{list-style-type:none;}
+.d_j{width:450px;height:200px;margin-left:0px;margin-top:0px;font-family:Microsoft YaHei;}
+.d1{padding-left:0px;padding-top:10px;font-weight:bold;}
+.d2{padding-left:0px;margin-top:0px;}
+.d3{float:left;padding-left:50px;}
+.d4{padding-left:0px;}
+
+/**编辑分组**/
+	</style>
+	<div class="d_j">
+		<ul>
+		
+			<form method="post">
+				<p class="d1">您确定删除这条数据吗 <b>?</b></p>
+				   <p class="d3"><input type="radio" name="way" value="delete">同时删除本组成员</p>
+					<p class="d3"><input type="radio" name="way" value="change" checked>将 <font color="red"><{$group_name.group_name}></font> 成员移至:
+						<select name="one_group">
+							<{section name=n loop=$all_group}>
+							<option value="<{$all_group[n].id}>" <{if $all_group[n].id== $group_id}> selected="selected" <{/if}>><{$all_group[n].group_name}></option>
+							<{/section}>
+						</select>
+					</p>
+					<!--
+				  	<p class="d3">
+					 <span style="margin-left:10px"><input type="submit" name="yes" value="确定" /></span>
+					  <span style="margin-left:10px"><span><input type="submit" name="cancel" value="取消" /></span></p>
+					  -->
+				  	
+			</form>
+		 
+		</ul>
+	</div>

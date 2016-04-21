@@ -1,0 +1,16 @@
+<{if $rate['page_num'] > 1}>
+	<div id="top_page">
+		<span>共<{$rate['total']}>条</span>
+		<span><{$rate['page']}>/<{$rate['page_num']}>页</span>
+	<{if $rate['page'] != 1}>
+		<a href="<{$rate['url']}><{$rate['page']-1}>">上一页</a>
+	<{else}>
+		<span>上一页</span>
+	<{/if}>
+	<{if $rate['page'] != $rate['page_num']}>
+		<a href="<{$rate['url']}><{$rate['page']+1}>">下一页</a>
+	<{else}>
+		<span>下一页</span>
+	<{/if}>
+	</div>
+<{/if}>

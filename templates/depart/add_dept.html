@@ -1,0 +1,55 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>添加部门</title>
+</head>
+<body>
+	<form method="post" action="../../action/depart/add_dept.php" >
+		<table cellspacing="1" class="grid">
+			<tr>
+				<td>部门名称：</td>
+				<td><input type="text" name="name" value="" size="30"/><font color="red"><{$error.name}></font></td>
+			</tr>
+			<tr class="grid1">
+				<td>所属部门：</td>
+				<td><select name="up_dept">
+					<{section name=n loop=$dept}>
+					<option value="<{$dept[n].id}>">
+					<{for $i=0;$i<$dept[n].count;$i++}>
+					-
+					<{/for}>
+					<{$dept[n].name}>
+					</option>
+					<{/section}>
+				</select></td>
+			</tr>
+	      
+			<tr class="grid1">
+				<td>负责人：</td>
+				<td><input type="text" name="header" value="" size="30" /><font color="red"><{$error.header}></font></td>
+			</tr>
+			<tr class="grid1">
+				<td>办公电话：</td>
+				<td><input type="text" name="office_phone" value="" size="30"/><font color="red"><{$error.office_phone}></font></td>
+			</tr>
+			<tr class="grid1">
+				<td>负责人联系方式：</td>
+				<td><input type="text" name="header_tel" value="" size="30" /><font color="red"><{$error.header_tel}></font></td>
+			</tr>
+			
+			<tr class="grid1">
+				<td>办公邮箱：</td>
+				<td><input type="text" name="email" value="" size="30" /><font color="red"><{$error.email}></font></td>
+			</tr>
+			<tr class="grid1">
+				<td>办公地址：</td>
+				<td><input type="text" name="address" value="" size="30"/></td>
+			</tr>
+			<tr class="grid1">
+				<td>部门简介：</td>
+				<td><input type="text" name="introduce" value="" size="30"/></td>
+			</tr>
+		</table>
+				<input type="submit" name="sub" value="确定添加" style="font-size:14px;"><font color="red"><{$prompt}></font>
+	</form>
+</body>
+</html>

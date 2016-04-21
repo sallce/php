@@ -1,0 +1,50 @@
+
+<style type="text/css">
+.ui-timepicker-div .ui-widget-header { margin-bottom: 8px; } 
+.ui-timepicker-div dl { text-align: left; } 
+.ui-timepicker-div dl dt { height: 25px; margin-bottom: -25px; } 
+.ui-timepicker-div dl dd { margin: 0 10px 10px 65px; } 
+.ui-timepicker-div td { font-size: 40%; } 
+.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; } 
+.ui_tpicker_hour_label,.ui_tpicker_minute_label,.ui_tpicker_second_label, 
+.ui_tpicker_millisec_label,.ui_tpicker_time_label{padding-left:20px} 
+</style>
+		
+	<div class="rizhichaxun1">
+	
+	<form method="post" action="../../action/log/log_query.php">
+	<div class="rizhichaxun">
+	
+		<ul>
+			<li>ID为查询自己的日志记录</li><br />
+
+			<li>起始时间  ：<input type="text" id="start_time" name="start_time" value="" /><{$error['start_time']}>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<select name="type">
+				<option value="1" <{if $type==1}>selected="selected"<{/if}>>短信查询</option>
+				<option value="2" <{if $type==2}>selected="selected"<{/if}>>登陆查询</option>
+			</select></li><br />
+			<li>终止时间  ：<input type="text" id="end_time" name="end_time" value="" /><{$error['end_time']}></li>
+			<br />
+			
+			<{if $right==1||$right==2}>
+			<li>登陆   ID  &nbsp;&nbsp;：<input type="text" name="login_id" value="" /><{$error['login_id']}></li>
+			<{/if}>
+		</ul>
+	</div>
+    <p class="rizhi"><input type="submit" name="test" value="查询" /></p>
+	
+	</form>
+ </div>
+
+
+	<script type="text/javascript" src="<{#TEM#}>js/jquery-ui.js"></script>
+	<script type="text/javascript" src="<{#TEM#}>js/jquery-ui-slide.min.js"></script>
+	<script type="text/javascript" src="<{#TEM#}>js/jquery-ui-timepicker-addon.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			// 实现时间按钮
+			$('#start_time').datetimepicker();
+			$('#end_time').datetimepicker();
+			});
+	</script>

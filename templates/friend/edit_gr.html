@@ -1,0 +1,40 @@
+ <div  class="xm">
+	 <form method="POST" enctype="multipart/form-data">
+	 <table width="60%" cellspacing="1" cellpadding="5" border="0" bgcolor="#BAD6EC">
+	<tbody>
+	<tr class="xm1">
+   <td><b>编辑分组</b></td>
+   </tr>
+	<tr class="xm2" bgcolor="#ffffff">
+  <td>
+  组名  :<input type="text" name="group_name" value="<{$old.group_name}>" size="20"/>
+  
+  </td>
+  </tr>
+	<tr class="xm2" bgcolor="#ffffff">
+  <td>
+  <p>备注  :</p>
+ <textarea name="note" rows="2" cols="55"><{$old.note}></textarea>
+  </td>
+  </tr>
+
+  </tbody>
+  </table>
+	
+	  <div  class="xm3">
+		
+	
+	   <input type="submit" name="yes"  class="button" value="确认" />
+	  <input type="submit" name="cancel"  class="button"value="取消" />
+	  </div>
+  </form>
+  </div>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+    var poi = '<{$point}>';
+    if( poi == '1'){
+      point('修改分组成功!','friend/edit_gr.php');
+    }
+  });
+  </script>

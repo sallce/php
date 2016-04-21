@@ -1,0 +1,14 @@
+<p><b class="ali"><{$class}>:</b><{$lev}></p>
+<{if $haha==1}>
+<form method="post" action="../../action/assign/add_msg.php?user_id=<{$user_id}>">
+<{/if}>
+<{if $haha==2}>
+<form method="post" action="../../action/assign/add_app.php?user_id=<{$user_id}>&newsid=<{$newsid}>">
+<{/if}>
+<p><b class="ali">增加：</b><input type="text" name="add_num" value="" />	<font color="red" size="2"><{$err}></font></p>
+
+
+
+<input type="submit" name="insert" value="确定" style="font-size:14px;">&nbsp;<font color="red" size="2"><{$prompt}></font>
+
+</form>

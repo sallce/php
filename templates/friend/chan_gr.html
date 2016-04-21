@@ -1,0 +1,25 @@
+<style type="text/css">
+.ali{
+font-size:13px;
+}
+</style>
+
+
+<{config_load file="base.php"}>
+	<div class="cg1">
+	<form method="post">
+	<div class="cg2">
+		
+	<p class="ali"><input type="radio" name="way" value="0" checked="checked"/>移动到所选组</p>
+    <p class="ali">	<input type="radio" name="way" value="1" />复制到所选组</p>
+    <p><select name="group" class="z8"></p>
+	<option value="0" <{if $info.group eq '0'}>selected="selected" <{/if}> >系统分组</option>
+	<{section name=n loop=$frd_group}>
+	<option value="<{$frd_group[n].id}>" <{if $info.group eq <{$frd_group[n].id}>}>selected="selected" <{/if}> ><{$frd_group[n].group_name}></option>
+	<{/section}>
+    </select>
+    <{$error}>
+	</div>
+	</div>
+     </form>
+	</div>

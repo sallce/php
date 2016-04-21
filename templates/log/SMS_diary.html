@@ -1,0 +1,45 @@
+
+	
+
+
+
+
+<div  class="gl">
+	
+<p>短信条数  ：&nbsp;<{$count}></p>
+<table width="99%" cellspacing="1" cellpadding="5" border="0" bgcolor="#99BBE8">
+<tbody>
+<tr class="thbg" bgcolor="#f1f1f1">
+<th>时间</th>
+<th>接收人</th>
+<th>短信内容</th>
+
+<{foreach from=$info item=num}>
+<tr class="normal" bgcolor="#ffffff">
+
+<td><{$num.time|date_format:"%Y-%m-%d %R"}></td>
+<td><{$num.rec_name}></td>
+<td><{$num.content}></td>
+
+
+</tr>
+<{/foreach}>
+</div>
+<div class="gl2">
+	
+
+<table width="99%" cellspacing="0" cellpadding="5" border="0" bgcolor="#F7F8F9">
+<tbody>
+<tr>
+<td class="text" align="right">
+<{include file="pages/default.html"}>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+</tbody>
+</table>

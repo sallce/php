@@ -1,0 +1,47 @@
+<div id="in">
+							<p id="search">
+							<form method="post" action="../../action/mess/sent_msg.php?class=1">
+								<img src="<{#TEM#}>images/icon-mail2.gif" />
+								<select class="search_d" name="find_type">
+									<option value="theme" >主题</option>
+									 <{if $type=='name'}>
+									 <option value="name" selected="selected">姓名</option>
+									 <option value="tel">手机号</option>
+									 <{elseif  $type=='tel'}>
+									 <option value="tel">姓名</option>
+									 <option value="name" selected="selected">手机号</option>
+									 <{/if}>
+								</select>
+								<input class="search_d" type="text" name="find_content" value="<{$con}>"/>
+								<input class="search_d" type="submit" name="" value="搜索" />
+							</form>
+							</p>
+								<table cellspacing="1" cellpadding="5" border="0" width="100%" bgcolor="#99BBE8">
+								<tbody>
+								<tr class="thbg">
+									<th><input type="checkbox" name="">全选</th>
+									<th>主题</th>
+									<th>接收者</th>	
+									<th>手机号</th>
+									<th>发送时间</th>	
+									<th>短信内容</th>
+								<{foreach from=$con_data item=num}>
+								</tr>
+								<tr bgcolor="#f1f2f3">
+									<td> <input type="checkbox" name=""></td>
+									<td><{$num.theme}></td>
+									<td><{$num.name}></td>
+									<td><{$num.tel}></td>
+									<td><{$num.time|date_format:"%Y-%m-%d %R"}></td>	
+									<td><{$num.content}></td><!--30~40-->
+								</tr>
+								<{/foreach}>
+								</tbody>
+								</table>
+
+							</p>
+							
+							
+						</div>
+						<input type="button" name="test" value="删除所选" />
+						<{include file="pages/default.html"}>

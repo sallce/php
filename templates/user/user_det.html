@@ -1,0 +1,51 @@
+<form method="post" action="../../action/user/user_alt.php?id=<{$id}>&tag=<{$tag}>" >
+		<table cellspacing="1" class="grid">
+			<tr>
+				<td>登陆id：</td>
+				<td><input type="text" name="login_id" value="<{$info.login_id}>"  size="30" /><font color="red" size="2"><{$error.login_id}></font></td>
+			</tr>
+			<tr class="xy">
+				<td>姓名：</td>
+				<td><input type="text" name="name" value="<{$info.name}>" size="30"  /><font color="red" size="2"><{$error.name}></font></td>
+			</tr>
+			<tr class="xy">
+				<td>密码：</td>
+				<td><input type="text" name="passwd" value="<{$passwd}>"  size="30"   /><font color="red" size="2"><{$error.passwd}></font></td>
+			</tr>
+			<tr class="xy">
+				<td>重复密码：</td>
+				<td><input type="text" name="passwd2" value="<{$passwd2}>" size="30"  /><font color="red" size="2"><{$error.passwd2}></font></td>
+			</tr>
+			<{if $pid == 0}>
+			<tr class="xy">
+				<td>所属部门:</td>
+				<td>
+					<select name="dept">
+						<option value=""  <{if $dept == ""}>selected<{/if}> disabled>--请选择部门--</option>
+						<{foreach name="dept" from=$dept_list item=num}>
+							<option value=<{$num.id}> <{if $info.dept == $num.id}>  selected <{/if}>><{$num.name}></font></option>
+						<{/foreach}>
+					</select>
+				<span class="error"><font color="red" size="2"><{$error.dept}></font></span>
+				</td>
+			</tr>
+			<{/if}>
+			<tr class="xy">
+				<td>办公室电话：</td>
+				<td><input type="text" name="office_phone" value="<{$info.office_phone}>"  size="30"  /><font color="red" size="2"><{$error.office_phone}></font></td>
+			</tr>
+			<tr class="xy">
+				<td>移动手机1：</td>
+				<td><input type="text" name="tel1" value="<{$info.tel_1}>" size="30"   /><font color="red" size="2"><{$error.tel1}></font></td>
+			</tr>
+			<tr class="xy">
+				<td>移动手机2：</td>
+				<td><input type="text" name="tel2" value="<{$info.tel_2}>" size="30" /><font color="red" size="2"><{$error.tel2}></font></td>
+			</tr>
+			<tr class="xy">
+				<td>电子邮箱：</td>
+				<td><input type="text" name="email" value="<{$info.email}>" size="30"  /></td>
+			</tr>
+		</table>
+		<{if $det==0}>	<a href="../../action/user/user_alt.php?id=<{$id}>&tag=<{$tag}>">	<input type="submit" name="insert" value="修改" style="font-size:14px;"> </a><font color="red">密码不填写即不修改&nbsp;</font><font color="green" size="3"><{$prompt}> <{/if}></font>
+	</form>

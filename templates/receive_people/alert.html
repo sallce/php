@@ -1,0 +1,53 @@
+<style type="text/css">
+	ul{
+	list-style:none;
+	}
+</style>
+
+<form method="post" id="chuli" name="chuli">
+	请输入查询名字:<input type="text" name="search" id="search_name" value="" />
+	<input type="button" name="test" value="查询" id="search" />
+</form>
+
+<div id="search_result"></div>
+
+<form id="myform1" name="myform1">
+	<ul>
+		<li><input type="checkbox" name="" id="all" /><label for="all">全选</label></li>
+		<li><input type="checkbox" name="people" value="one" class="the"/><label>one</label></li>
+		<li><input type="checkbox" name="people" value="two" class="the"/><label>two</label></li>
+		<li><input type="checkbox" name="people" value="three" class="the"/><label>three</label></li>
+		<li><input type="checkbox" name="people" value="four" class="the"/><label>four</label></li>
+	</ul>
+</form>
+
+
+<script type="text/javascript" src="./jquery.js"></script>
+<script type="text/javascript" src="./artDialog.source.js?skin=default"></script>
+<script type="text/javascript" src="./iframeTools.source.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#search_result').hide();
+		$('#search').click(function(){
+			var search_name = $('#search_name').val();
+			$.post(
+				'chuli.php',
+				{search_name : search_name},
+				function(data){
+					$('#myform1').hide();
+					$('#search_result').show();
+					$('#search_result').html(data);
+				}
+				
+			);
+		});
+		
+		//实现全选
+		$('#all').click(function(){
+			if($(this).attr('checked') == true)
+				$('.the').attr('checked','ture');
+			else
+				$('.the').removeAttr('checked');
+		});
+	});
+</script>

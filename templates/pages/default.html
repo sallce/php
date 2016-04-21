@@ -1,0 +1,62 @@
+<{if $rate['page_num'] > 1}>
+	<ul id="page">
+		<li><span>共<{$rate['page_num']}>页,<{$rate['total']}>条数据</span></li>
+	<{if $rate['page_num'] > 9}>
+		<{if $rate['page'] != 1}>
+			<li><a href="<{$rate['url']}><{1}>">首页</a></li>
+		<{else}>
+			<li><span>首页</span></li>
+		<{/if}>
+	<{/if}>
+	<{if $rate['page'] != 1}>
+		<li><a href="<{$rate['url']}><{$rate['page']-1}>"><<</a></li>
+	<{else}>
+		<li><span><<</span></li>
+	<{/if}>
+
+	<{if $rate['page_num'] <= 10}>
+		<{$pagestart = 1}>
+		<{$pageend = $rate['page_num']}>
+	<{else}>
+		<{if $rate['page']%10 < 3 and $rate['page']%5 < 3}>
+			<{$pagestart = $rate['page'] - $rate['page']%10 - 4}>
+			<{$pageend = $rate['page'] - $rate['page']%10 + 5}>
+		<{elseif $rate['page']%10 > 3 and $rate['page']%5 < 3}>
+			<{$pagestart = $rate['page'] - $rate['page']%10 + 1}>
+			<{$pageend = $rate['page'] - $rate['page']%10 + 10}>
+		<{elseif $rate['page']%10 >= 3 and $rate['page']%5 >= 3}>
+			<{$pagestart = $rate['page'] - $rate['page']%5 + 1}>
+			<{$pageend = $rate['page'] - $rate['page']%5 + 10}>
+		<{/if}>
+
+		<{if $pagestart + 9 >= $rate['page_num']}>
+			<{$pageend = $rate['page_num']}>
+			<{$pagestart = $rate['page_num'] - 9}>
+		<{/if}>
+		<{if $pageend - 10 <= 0}>
+			<{$pagestart = 1}>
+			<{$pageend = 10}>
+		<{/if}>
+	<{/if}>
+	<{for $i = $pagestart ; $i <= $pageend; $i++}>
+		<{if $i == $rate['page']}>
+			<li><span class="on"><{$i}></span></li>
+			<{continue}>
+		<{/if}>
+		<li><a href="<{$rate['url']}><{$i}>"><{$i}></a></li>
+	<{/for}>
+
+	<{if $rate['page'] != $rate['page_num']}>
+		<li><a href="<{$rate['url']}><{$rate['page']+1}>">>></a></li>
+	<{else}>
+		<li><span>>></span></li>
+	<{/if}>
+	<{if $rate['page_num'] > 10}>
+		<{if $rate['page'] != $rate['page_num']}>
+			<li><a href="<{$rate['url']}><{$rate['page_num']}>">尾页</a></li>
+		<{else}>
+			<li><span>尾页</span></li>
+		<{/if}>
+	<{/if}>
+	</ul>
+<{/if}>

@@ -1,0 +1,110 @@
+
+<div id="test" class="all4">
+  
+
+   <div  class="z">
+   <form method="POST" enctype="multipart/form-data">
+   <table width="99%" cellspacing="1" cellpadding="5" border="0" bgcolor="#BAD6EC">
+  <tbody>
+  <tr class="z1">
+   <td><b>基本信息</b></td>
+   </tr>
+  <tr class="z2" bgcolor="#ffffff">
+  <td>
+  姓 名  :
+ <input type="text" value="<{$info.name}>" name="name"size="30" class="zz11"> &nbsp;&nbsp;&nbsp;<font color="red">*必填</font><{$error.name}>
+  </td>
+  </tr>
+    <tr class="z2" bgcolor="#ffffff">
+  <td>
+  用户名  :
+ <input type="text" value="<{$info.login_id}>" name="login_id"size="30" class="zz12"> &nbsp;&nbsp;&nbsp; <font color="red">*必填用于登陆</font><{$error.login_id}>
+  </td>
+  </tr>
+  <tr class="z2" bgcolor="#ffffff">
+  <td>
+   生 日 : 
+  <select name="year" class="zz11">
+  <{for $i=1969;$i<=2000;$i++}>
+  <option value="<{$i}>" <{if $i eq $birth.0}> selected="selected" <{/if}> ><{$i}></option>
+  <{/for}>
+  </select>  年
+
+   <select name="month"class="zz11">
+   <{for $i=1;$i<=12;$i++}>
+  <option value="<{$i}>" <{if $i eq $birth.1}> selected="selected" <{/if}> ><{$i}></option>
+  <{/for}>
+   </select>  月
+
+   <select name="day"class="zz11">
+   <{for $i=1;$i<=31;$i++}>
+  <option value="<{$i}>" <{if $i eq $birth.2}> selected="selected" <{/if}> ><{$i}></option>
+  <{/for}>
+  </select>日
+  </td>
+  </tr>
+  <tr class="z2" bgcolor="#ffffff">
+  <td>
+   性 别    :
+ <select name="sex" class="zz11">
+  <option value="0" <{$sex.man}>><b>男</b></option>
+  <option value="1" <{$sex.nv}>><b>女</b></option>
+ </select>
+  </td>
+  </tr>
+  <tr class="z2" bgcolor="#ffffff">
+<td>
+手 机  :  
+<input type="text" value="<{$info.tel_1}>" name="tel_1" size="30"class="zz11"> &nbsp;&nbsp;&nbsp; <font color="red">*必填</font><{$error.tel}>
+</td>
+</tr>
+<tr class="z2" bgcolor="#ffffff">
+<td>
+手 机2: 
+<input type="text" value="<{$info.tel_2}>" name="tel_2" size="30" class="zz13">
+</td>
+</tr>
+</tbody>
+
+</table>
+    </from>
+
+  </div>
+  <br />
+  
+  <div class="z3">
+
+  <table width="99%" cellspacing="1" cellpadding="5" border="0" bgcolor="#BAD6EC">
+  <tbody>
+  <tr class="z1">
+   <td><b>办公信息</b></td>
+   </tr>
+  <tr class="z2" bgcolor="#ffffff">
+  <td>
+  办公电话  :
+ <input type="text" value="<{$info.office_phone}>" name="office_phone"size="30" class="zz22"> 
+  </td>
+  </tr>
+  <tr class="z2" bgcolor="#ffffff">
+  <td>
+  单位传真  :
+ <input type="text" value="<{$info.fax}>" name="fax"size="30" class="zz22">
+  </td>
+  </tr>
+  <tr class="z2" bgcolor="#ffffff">
+  <td>
+  电子邮箱  :
+ <input type="text" value="<{$info.email}>" name="email"size="30" class="zz22"> 
+  </td>
+  </tr>
+  
+  </tbody>
+  </table>
+
+  </div>
+  <br />
+
+  <input type="submit" name="sub"  class="button" value="保存" />
+  <input type="submit" name="cancel"  class="button"  value="取消" />
+
+</div>

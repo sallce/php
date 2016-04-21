@@ -1,0 +1,153 @@
+
+<div id="test" class="all22">
+
+
+     <div  class="z">
+   <form  method="POST" enctype="multipart/form-data">
+     <table width="770" cellspacing="1" cellpadding="5" border="0" bgcolor="#BAD6EC">
+    <tbody>
+    <tr class="z1">
+   <td><b>基本信息</b></td>
+   </tr>
+    <tr class="z2" bgcolor="#ffffff">
+  <td>
+  姓名  :
+ <input type="text" value="<{$info.name}>" name="name"size="25" class="xp"> &nbsp;&nbsp;&nbsp;<font color="red">*必填</font>
+  </td>
+  </tr>
+  <tr class="z2" bgcolor="#ffffff">
+  <td>
+    生日 : 
+  <select name="year" class="xp">
+  <{for $i=1952;$i<=2000;$i++}>
+  <option value="<{$i}>" <{if $i eq $birth.0}> selected="selected" <{/if}> ><{$i}></option>
+  <{/for}>
+  </select>  年
+
+   <select name="month" class="xp">
+   <{for $i=1;$i<=12;$i++}>
+  <option value="<{$i}>" <{if $i eq $birth.1}> selected="selected" <{/if}> ><{$i}></option>
+  <{/for}>
+   </select>  月
+
+   <select name="day" class="xp">
+   <{for $i=1;$i<=31;$i++}>
+  <option value="<{$i}>" <{if $i eq $birth.2}> selected="selected" <{/if}> ><{$i}></option>
+  <{/for}>
+  </select>日
+  </td>
+  </tr>
+  <tr class="z2" bgcolor="#ffffff">
+  <td>
+   性别    :
+ <select name="sex" class="xp">
+  <option value="0" <{if $info.sex eq '0'}>selected="selected" <{/if}> ><b>男</b></option>
+  <option value="1" <{if $info.sex eq '1'}>selected="selected" <{/if}> ><b>女</b></option>
+ </select>
+  </td>
+  </tr>
+   <tr class="z2" bgcolor="#ffffff">
+<td>
+工作单位  : 
+<input type="text" name="depart" size="25" value="<{$info.depart}>" class="xp1">
+</td>
+</tr>
+<tr class="z2" bgcolor="#ffffff">
+<td>
+手机  :  
+<input type="text" name="tel_1" size="25" value="<{$info.tel_1}>" class="xp"> &nbsp;&nbsp;&nbsp; <font color="red">*必填</font>
+</td>
+</tr>
+<tr class="z2" bgcolor="#ffffff">
+<td>
+办公电话  : 
+<input type="text" name="off_pho" size="25" value="<{$info.off_pho}>" class="xp1">
+</td>
+</tr>
+</tbody>
+
+</table>
+  </div>
+  <br />
+
+  <div class="z3">
+
+
+  <table width="770" cellspacing="1" cellpadding="5" border="0" bgcolor="#BAD6EC">
+
+  <tr id="show_or" class="z1">
+   <td><b>详细信息</b></td>
+   </tr>
+     <tbody id="detail_show">
+  <tr class="z2" bgcolor="#ffffff">
+  <td>
+  手机2  :
+ <input type="text"  name="tel_2" size="25" value="<{$info.tel_2}>" class="xp12"> 
+  </td>
+  </tr>
+  <tr class="z2" bgcolor="#ffffff">
+  <td>
+  办公电话2  :
+ <input type="text"  name="off_pho_2" size="25" value="<{$info.off_pho_2}>" class="xp13">
+  </td>
+  </tr>
+  <tr class="z2" bgcolor="#ffffff">
+  <td>
+  单位传真  :
+ <input type="text" name="fax" size="25" value="<{$info.fax}>" class="xp1">
+  </td>
+  </tr>
+  <tr class="z2" bgcolor="#ffffff">
+  <td>
+  家庭电话  :
+ <input type="text" name="fam_pho" size="25" value="<{$info.fam_pho}>" class="xp1"> 
+  </td>
+  </tr>
+  <tr class="z2" bgcolor="#ffffff">
+  <td>
+  家庭住址  :
+ <input type="text" name="fam_address" size="25" value="<{$info.fam_address}>" class="xp1"> 
+  </td>
+  </tr>
+  <tr class="z2" bgcolor="#ffffff">
+  <td>
+    邮箱  :
+ <input type="text" name="email" size="25" value="<{$info.email}>" class="xp">  
+  </td>
+  </tr>
+  <tr class="z2" bgcolor="#ffffff">
+  <td>
+  备注  :
+ <textarea name="note" rows="3" cols="80" class="xp"><{$info.note}></textarea>
+  </td>
+  </tr>
+
+  </tbody>
+  </table>
+  </div>
+  <br />
+
+  <div id="test" class="z6">
+    <select name="group" class="z8">
+    <option value="0" <{if $info.group eq '0'}>selected="selected" <{/if}> >我的好友 </option>
+    <{section name=n loop=$frd_group}>
+    <option value="<{$frd_group[n].id}>" <{if $info.group eq <{$frd_group[n].id}>}>selected="selected" <{/if}> ><{$frd_group[n].group_name}></option>
+    <{/section}>
+  </select>
+  <input type="submit" name="sub" value="保存" />
+  <input type="submit" name="cancel" value="取消" />
+  </form>
+  </div>
+</div>
+<script type="text/javascript">
+
+   $(document).ready(function(){
+      var poi = '<{$point}>';
+      if( poi == '1'){
+        point('修改好友成功!','friend/list_frd.php');
+      }
+    $('#show_or').click(function(){
+      $('#detail_show').toggle();
+    });
+  });
+</script>

@@ -1,0 +1,42 @@
+
+
+
+
+
+<div  class="gl">
+	
+<p>总条数  ：&nbsp;<{$count}></p>
+<table width="99%" cellspacing="1" cellpadding="5" border="0" bgcolor="#99BBE8">
+<tbody>
+<tr class="thbg" bgcolor="#f1f1f1">
+<th>日志编号</th>
+<th>姓名</th>
+<th>登录时间</th>
+<th>登陆  id</th>
+
+
+<{foreach from=$info item=num}>
+<tr class="normal" bgcolor="#ffffff">
+
+<td>&nbsp;<{$num.id}></td>
+<td>&nbsp;<{$user.name}></td>
+<td>&nbsp;<{$num.log_time|date_format:"%Y-%m-%d %R"}></td>
+<td>&nbsp;<{$num.log_ip}></td>
+
+
+</tr>
+<{/foreach}>
+</div>
+<div class="gl2">
+	
+
+<table width="99%" cellspacing="0" cellpadding="5" border="0" bgcolor="#F7F8F9">
+<tbody>
+<tr>
+<td class="text" align="right">
+<{include file="pages/default.html"}>
+</td>
+</tr>
+</tbody>
+</table>
+</div>

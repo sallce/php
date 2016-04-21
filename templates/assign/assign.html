@@ -1,0 +1,41 @@
+﻿<div id="in" >
+	<p>短信总量：<{$res.all}></p>
+	<p>已分配：<{$res.assign}></p>
+	<p><b>用户短信分配</b></p>
+	<table cellspacing="1" cellpadding="5" width="99%" bgcolor="#99BBE8">
+		<tbody>
+		<tr class="thbg">
+			<th>用户</th>	
+			<th>短信总配额</th>	
+			<th>已使用总量</th>
+			<th>上次配额</th>	
+			<th>短信剩余数量</th>
+			<th>增加短信配额</th>	
+		</tr>
+		<{foreach from=$data item=num}>
+		<tr bgcolor="#f1f2f3">
+			
+
+			<td><{$num.user}></td>
+			<td><{$num.all}></td>
+			<td><{$num.used}></td>
+			<td><{$num.last_add}></td>
+			<td><{$num.left}></td>
+			<td><a href="../../action/assign/add_msg.php?user_id=<{$num.id}>"><img src="../../templates/images/add.gif" /></a></td>
+
+		</tr>
+		<{/foreach}>
+		</tbody>
+		</table>
+		<div id ="page">
+			<{include file="pages/default.html"}>
+		</div>
+</div>
+
+<!--<ul id="page">
+	<li><a href="#">上一页</a></li>
+	<li class="current"><a href="#">1</a></li>
+	<li><a href="#">2</a></li>
+	<li><a href="#">3</a></li>
+	<li><a href="#">下一页</a></li>
+</ul>-->

@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>添加收信人</title>
+		<script type="text/javascript" src="/js/artDialog.source.js?skin=default"></script>
+		<script type="text/javascript" src="./iframeTools.source.js"></script>
+		<script type="text/javascript" src="./jquery.js"></script>
+		<style type="text/css">
+			#tc{
+			display:none;
+			}
+			ul{
+			list-style:none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="tc">
+			<iframe src="alert.html" width="300px" height="500px" id="xuanzhe" frameborder="0"></iframe>
+		</div>
+		<div>
+			发送对象:<br />
+			<textarea name="all_people" id="all_people" rows="7" cols="60"></textarea>
+		</div>
+		
+		<input type="button" name="" value="从部门添加收信人" id="click" />
+		<input type="button" name="" value="从好友列表添加收信人" id="fri_click" />
+		
+		<script type="text/javascript">
+		$(document).ready(function(){
+			// 从部门添加收信人
+			$('#click').click(function(){
+				/**
+				art.dialog({
+					content: document.getElementById('tc'),
+					title: '添加收信人',
+					ok: function () {
+						//点击 实现添加收信人
+						
+						return false;
+					},
+					lock: true,
+					opacity: 0.87,			// 透明度
+					fixed: true,
+					cancelVal: '完成',
+					okVal: '添加收信人',
+					cancel: true 			//为true等价于function(){}
+				});
+				*/
+				art.dialog.open('xuanzhe.html', {
+					title: '请选择接收人',
+					//再点击"添加收信人"按钮后执行
+					ok:function(){
+						var iframe = this.iframe.contentWindow;
+						var top = art.dialog.top;// 引用顶层页面window对象
+						var all_people = ""; // 获取接受短信的所有人
+						var to_people = iframe.document.getElementsByName('people');
+						for( var i=0;i<to_people.length;i++)
+						{
+							if(to_people[i].checked)
+							{
+								//获取数据
+								all_people += to_people[i].value + ",";
+							}
+						}
+							if(all_people){
+							/**
+								$.post(
+									'chuli.php',
+									{people :all_people},
+									function(data){
+										// 存储数据
+										if($('#all_people').val()){
+											var old_people = $('#all_people').val();
+											$('#all_people').val(old_people + data);
+										}else{
+											$('#all_people').val(data);
+										}
+									},
+									'html'
+								);
+								*/
+							}
+						return false;
+					},
+					okVal: '添加收信人'
+				});
+			});
+			
+			//从好友列表中添加收信人
+			$('#fri_click').click(function(){
+			
+				art.dialog.open('fri_xuanzhe.html', {
+					
+					title: '请选择接收人',
+					//再点击"添加收信人"按钮后执行
+					ok:function(){
+						var iframe = this.iframe.contentWindow;
+						var top = art.dialog.top;// 引用顶层页面window对象
+						var all_people = ""; // 获取接受短信的所有人
+						var to_people = iframe.document.getElementsByName('people');
+						for( var i=0;i<to_people.length;i++)
+						{
+							if(to_people[i].checked)
+							{
+								//获取数据
+								all_people += to_people[i].value + ",";
+							}
+						}
+						//把数据写到输入框中
+						if($('#all_people').val()){
+							var old_people = $('#all_people').val();
+							$('#all_people').val(old_people + all_people);
+							}else{
+								$('#all_people').val(all_people);
+							}
+						return false; //是否关闭窗口,false不关闭,ture关闭
+					},
+					okVal: "添加至收信人",
+				});
+				
+			});
+			
+			//实现全选
+			$('#all').click(function(){
+				if($(this).attr('checked') == true)
+					$('.the').attr('checked','ture');
+				else
+					$('.the').removeAttr('checked');
+			});
+		});
+		</script>
+	</body>
+</html>
