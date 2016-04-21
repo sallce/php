@@ -1,0 +1,17 @@
+profiles			$smarty->assign('js_display',0);
+
+massagePage			$smarty->assign('js_display',1);
+
+departmentManage	$smarty->assign('js_display',2);
+
+userManage			$smarty->assign('js_display',3);
+
+friendManage		$smarty->assign('js_display',4);
+
+MassageManage		$smarty->assign('js_display',5);
+
+logPage 			$smarty->assign('js_display',6);
+
+setting 			$smarty->assign('js_display',7);
+
+
