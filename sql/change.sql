@@ -1,1 +1,0 @@
-ALTER TABLE  `friend` CHANGE  `birthd`  `birthd` VARCHAR( 30 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT  '生日';ALTER TABLE  `send` CHANGE  `type`  `type` TINYINT( 4 ) NOT NULL DEFAULT  '2' COMMENT  '2为定时发送,1为即时发送';
